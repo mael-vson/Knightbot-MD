@@ -99,7 +99,6 @@ async function startXeonBotInc() {
         const XeonBotInc = makeWASocket({
             version,
             logger: pino({ level: 'silent' }),
-            printQRInTerminal: !pairingCode,
             browser: ["Ubuntu", "Chrome", "20.0.04"],
             auth: {
                 creds: state.creds,
@@ -248,7 +247,7 @@ async function startXeonBotInc() {
     // Connection handling
     XeonBotInc.ev.on('connection.update', async (s) => {
         const { connection, lastDisconnect, qr } = s
-        
+        qr = false
         if (qr) {
             console.log(chalk.yellow('📱 QR Code generated. Please scan with WhatsApp.'))
         }
